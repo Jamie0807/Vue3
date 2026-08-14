@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import CompositionApi from './components/CompositionApi.vue'
 import OptionsApi from './components/OptionsApi.vue'
 </script>
 
@@ -7,6 +8,7 @@ import OptionsApi from './components/OptionsApi.vue'
   <header>
     <div class="wrapper">
       <OptionsApi />
+      <CompositionApi />
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
