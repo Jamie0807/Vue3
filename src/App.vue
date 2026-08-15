@@ -1,7 +1,16 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
 import CompositionApi from './components/CompositionApi.vue'
 import OptionsApi from './components/OptionsApi.vue'
+import CompositionPropsEmit from './components/CompositionPropsEmit.vue'
+import OptionPropsEmit from './components/OptionPropsEmit.vue'
+import CompositionSlots from './components/CompositionSlots.vue'
+
+const age = ref(25)
+
+const say = (val: string) => {
+  console.log(val)
+}
 </script>
 
 <template>
@@ -9,14 +18,27 @@ import OptionsApi from './components/OptionsApi.vue'
     <div class="wrapper">
       <OptionsApi />
       <CompositionApi />
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+
+      <h2>Composition API</h2>
+      <CompositionPropsEmit name="Jamie" :age="age" @say="say" />
+      <button @click="age++">增加年龄</button>
+
+      <h2>Options API</h2>
+      <OptionPropsEmit OptionsName="King" :OptionsAge="10" />
+
+      <CompositionSlots>
+        <template v-slot:header="{ count }">
+          <h1>父给子组件传递的header 子组件给父组件传递的参数:{{ count }}</h1>
+        </template>
+        <template #body="{ count }">
+          <h1>父给子组件传递的body 子组件给父组件传递的参数:{{ count }}</h1>
+        </template>
+        <template #footer="{ count }">
+          <h1>父给子组件传递的footer 子组件给父组件传递的参数:{{ count }}</h1>
+        </template>
+      </CompositionSlots>
     </div>
   </header>
-
-  <RouterView />
 </template>
 
 <style scoped>

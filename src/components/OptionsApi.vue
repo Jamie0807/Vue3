@@ -48,8 +48,21 @@ export default {
   beforeMount() {
     console.log('beforeMount')
   },
+  // 组件挂载完成后调用
   mounted() {
     console.log('mounted')
+
+    // 使用 refs 获取 canvas 元素
+    const canvasDom = this.$refs.canvas as HTMLCanvasElement
+
+    // 获取 canvas 上下文
+    const canvasCtx = canvasDom.getContext('2d')
+
+    canvasCtx?.beginPath()
+    canvasCtx?.moveTo(0, 0)
+    canvasCtx?.lineTo(100, 100)
+    canvasCtx?.stroke()
+    canvasCtx?.closePath()
   },
 }
 </script>
@@ -65,5 +78,7 @@ export default {
     <button @click="incrementCount">Increment Count</button>
     <button @click="toggleEvent">Hide</button>
     <button @click="addItem">Add Item</button>
+
+    <canvas ref="canvas"></canvas>
   </div>
 </template>

@@ -15,6 +15,8 @@ const count = ref(1)
 const isShow = ref(true)
 const list = ref(['1', '2', '3'])
 
+const canvas = ref<HTMLCanvasElement>()
+
 // 定义一个计算属性
 const doubleCount = computed(() => {
   return count.value * 2
@@ -53,6 +55,16 @@ onBeforeMount(() => {
 // 定义一个 onMounted 生命周期钩子
 onMounted(() => {
   console.log('onMounted')
+  // 使用 refs 获取 canvas 元素
+
+  const canvasDom = canvas.value
+  // 获取 canvas 上下文
+  const canvasCtx = canvasDom?.getContext('2d')
+  canvasCtx?.beginPath()
+  canvasCtx?.moveTo(0, 0)
+  canvasCtx?.lineTo(100, 100)
+  canvasCtx?.stroke()
+  canvasCtx?.closePath()
 })
 
 // 定义一个 onBeforeUpdate 生命周期钩子
@@ -77,5 +89,6 @@ onUpdated(() => {
     <button @click="incrementCount">Increment Count</button>
     <button @click="toggleEvent">Hide</button>
     <button @click="addItem">Add Item</button>
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
