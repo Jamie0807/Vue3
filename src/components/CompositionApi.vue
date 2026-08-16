@@ -8,6 +8,9 @@ import {
   onMounted,
   onBeforeUpdate,
   onUpdated,
+  reactive,
+  watchSyncEffect,
+  watchPostEffect,
 } from 'vue'
 
 // 定义一个响应式数据
@@ -27,6 +30,17 @@ const incrementCount = () => {
   count.value++
 }
 
+// reactive 定义一个响应式对象
+const info = reactive({
+  name: 'Composition API',
+  age: 18,
+})
+
+// 这里不用info.value, 因为info是一个响应式对象, 直接修改info.age即可触发响应
+const incrementAge = () => {
+  info.age++
+}
+
 const toggleEvent = () => {
   isShow.value = !isShow.value
 }
@@ -42,9 +56,26 @@ watch(count, (newVal, oldVal) => {
   document.title = newVal.toString()
 })
 
+watch(
+  isShow,
+  (newVal, oldVal) => {
+    console.log(watch, 'isShow changed from', oldVal, 'to', newVal)
+  },
+  { immediate: true, deep: true },
+)
+
 // 定义一个 watchEffect 监听 isShow 变化
 watchEffect(() => {
   document.title = isShow.value.toString()
+  console.log(watchPostEffect, isShow.value)
+})
+
+watchSyncEffect(() => {
+  console.log(watchSyncEffect, isShow.value)
+})
+
+watchPostEffect(() => {
+  console.log(watchPostEffect, isShow.value)
 })
 
 // 定义一个 onBeforeMount 生命周期钩子
@@ -90,6 +121,11 @@ onUpdated(() => {
     </TransitionGroup>
 
     <button @click="incrementCount">Increment Count</button>
+
+    <p>Name: {{ info.name }}</p>
+    <p>Age: {{ info.age }}</p>
+    <!-- <button @click="info.age++">Increment Age</button> -->
+    <button @click="incrementAge">Increment Age</button>
     <button @click="toggleEvent">Hide</button>
     <button @click="addItem">Add Item</button>
     <canvas ref="canvas"></canvas>
