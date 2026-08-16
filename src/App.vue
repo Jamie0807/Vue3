@@ -7,6 +7,7 @@ import OptionPropsEmit from './components/OptionPropsEmit.vue'
 import CompositionSlots from './components/CompositionSlots.vue'
 import SuspenseFather from './components/SuspenseFather.vue'
 import DirectiveDemo from './components/DirectiveDemo.vue'
+import CounterDemo from './components/CounterDemo.vue'
 
 const age = ref(25)
 
@@ -43,6 +44,8 @@ const say = (val: string) => {
       <SuspenseFather />
 
       <DirectiveDemo />
+
+      <CounterDemo />
     </div>
   </header>
 </template>
