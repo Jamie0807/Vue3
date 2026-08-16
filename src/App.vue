@@ -5,6 +5,7 @@ import OptionsApi from './components/OptionsApi.vue'
 import CompositionPropsEmit from './components/CompositionPropsEmit.vue'
 import OptionPropsEmit from './components/OptionPropsEmit.vue'
 import CompositionSlots from './components/CompositionSlots.vue'
+import SuspenseFather from './components/SuspenseFather.vue'
 
 const age = ref(25)
 
@@ -37,6 +38,8 @@ const say = (val: string) => {
           <h1>父给子组件传递的footer 子组件给父组件传递的参数:{{ count }}</h1>
         </template>
       </CompositionSlots>
+
+      <SuspenseFather />
     </div>
   </header>
 </template>
