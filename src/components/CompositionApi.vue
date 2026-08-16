@@ -82,13 +82,28 @@ onUpdated(() => {
     <h1>Composition API</h1>
     <p>Count: {{ count }}</p>
     <p>Double Count: {{ doubleCount }}</p>
-    <p v-if="isShow">Is Show: {{ isShow }}</p>
-    <ul>
+    <transition name="fade">
+      <p v-if="isShow">Is Show: {{ isShow }}</p>
+    </transition>
+    <TransitionGroup name="fade">
       <li v-for="(item, index) in list" :key="index">{{ index }}: {{ item }}</li>
-    </ul>
+    </TransitionGroup>
+
     <button @click="incrementCount">Increment Count</button>
     <button @click="toggleEvent">Hide</button>
     <button @click="addItem">Add Item</button>
     <canvas ref="canvas"></canvas>
   </div>
 </template>
+<style scoped>
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(-100px) rotate(360deg);
+}
+</style>
