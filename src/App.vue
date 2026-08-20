@@ -8,6 +8,8 @@ import CompositionSlots from './components/CompositionSlots.vue'
 import SuspenseFather from './components/SuspenseFather.vue'
 import DirectiveDemo from './components/DirectiveDemo.vue'
 import CounterDemo from './components/CounterDemo.vue'
+import CompositionList from './components/CompositionList.vue'
+import ToggleDemo from './components/ToggleDemo.vue'
 
 const age = ref(25)
 
@@ -46,6 +48,10 @@ const say = (val: string) => {
       <DirectiveDemo />
 
       <CounterDemo />
+
+      <CompositionList />
+
+      <ToggleDemo />
     </div>
   </header>
 </template>
